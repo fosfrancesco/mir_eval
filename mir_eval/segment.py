@@ -540,7 +540,7 @@ def _contingency_matrix(reference_indices, estimated_indices):
     return scipy.sparse.coo_matrix((np.ones(ref_class_idx.shape[0]),
                                     (ref_class_idx, est_class_idx)),
                                    shape=(n_ref_classes, n_est_classes),
-                                   dtype=np.int64).toarray()
+                                   dtype=int).toarray()
 
 
 def _adjusted_rand_index(reference_indices, estimated_indices):
@@ -766,8 +766,8 @@ def _adjusted_mutual_info_score(reference_indices, estimated_indices):
     # sklearn.metrics.cluster.expected_mutual_information
     R, C = contingency.shape
     N = float(n_samples)
-    a = np.sum(contingency, axis=1).astype(np.int32)
-    b = np.sum(contingency, axis=0).astype(np.int32)
+    a = np.sum(contingency, axis=1).astype(int)
+    b = np.sum(contingency, axis=0).astype(int)
     # There are three major terms to the EMI equation, which are multiplied to
     # and then summed over varying nij values.
     # While nijs[0] will never be used, having it simplifies the indexing.

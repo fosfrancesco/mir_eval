@@ -510,7 +510,7 @@ def encode(chord_label, reduce_extended_chords=False,
         semitone_bitmap += scale_degree_to_bitmap(scale_degree,
                                                   reduce_extended_chords)
 
-    semitone_bitmap = (semitone_bitmap > 0).astype(np.int64)
+    semitone_bitmap = (semitone_bitmap > 0).astype(int)
     if not semitone_bitmap[bass_number] and strict_bass_intervals:
         raise InvalidChordException(
             "Given bass scale degree is absent from this chord: "
@@ -544,8 +544,8 @@ def encode_many(chord_labels, reduce_extended_chords=False):
 
     """
     num_items = len(chord_labels)
-    roots, basses = np.zeros([2, num_items], dtype=np.int64)
-    semitones = np.zeros([num_items, 12], dtype=np.int64)
+    roots, basses = np.zeros([2, num_items], dtype=int)
+    semitones = np.zeros([num_items, 12], dtype=int)
     local_cache = dict()
     for i, label in enumerate(chord_labels):
         result = local_cache.get(label, None)
